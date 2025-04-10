@@ -14,38 +14,42 @@ To write a python program to perform stop and wait protocol
 ## PROGRAM
 ### Client:
 ```
-import socket
-from datetime import datetime
+#NAME: RAKSHITHA J
+#REG NO: 212223240135
+
+import socket 
 s=socket.socket()
 s.bind(('localhost',8000))
-s.listen(5)
-c,addr=s.accept()
-print("Client Address : ",addr)
-now = datetime.now()
-c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
-ack=c.recv(1024).decode()
-if ack:
-    print(ack)
-c.close()
+s.listen(5) 
+c,addr=s.accept() 
+while True: 
+    i=input("Enter a data: ") 
+    c.send(i.encode()) 
+    ack=c.recv(1024).decode() 
+    if ack: 
+        print(ack) 
+        continue 
+    else: 
+        c.close() 
+        break 
 
 ```
 ### Server:
 ~~~
-import socket
-s=socket.socket()
-s.connect(('localhost',8000))
-print(s.getsockname())
-print(s.recv(1024).decode())
-s.send("acknowledgement recived from the server".encode())
+import socket 
+s=socket.socket() 
+s.connect(('localhost',8000)) 
+while True: 
+    print(s.recv(1024).decode()) 
+    s.send("Acknowledgement Recived".encode())
 ~~~
 
 
 ## OUTPUT
-### Client:
-![Screenshot 2025-03-28 140245](https://github.com/user-attachments/assets/b00a4be6-5c72-43af-b0cd-fd9b0433ba71)
+![image](https://github.com/user-attachments/assets/a34dbc03-880d-42bf-bbd7-14820c955011)
 
-### Server:
-![Screenshot 2025-03-28 140302](https://github.com/user-attachments/assets/456ae4d0-f48a-4094-bea4-e08811734135)
+
+
 
 
 ## RESULT
